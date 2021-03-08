@@ -6,7 +6,6 @@ const defaultBtn = document.querySelector("#default-btn");
 const customBtn = document.querySelector("#custom-btn");
 const cancelBtn = document.querySelector("#cancel-btn i");
 const img = document.querySelector(".preview-img");
-let regExp = /[0-9a-zA-Z\^\&\'\@\{\}\[\]\,\$\=\!\-\#\(\)\.\%\+\~\_ㄱ-ㅎ|ㅏ-ㅣ|가-힣]+$/;
 let file;
 
 function defaultBtnActive() {
@@ -17,7 +16,7 @@ defaultBtn.addEventListener("change", function () {
     file = this.files[0];
     fileValue = this.files[0].name;
     wrapper.classList.add("active");
-    console.log(fileValue);
+    fileName.textContent = fileValue;
 
     //사용자 선택파일을 가져오면, [0]번째 파일만 선택함을 의미한다.
     showFile(); //calling function
@@ -27,12 +26,12 @@ defaultBtn.addEventListener("change", function () {
 //If user Drag File Over wrapper
 wrapper.addEventListener("dragover", (event) => {
     event.preventDefault();
-    dragText.innerHTML = "Release to Upload File";
+    dragText.textContent = "Release to Upload File";
 });
 
 //If user leave dragged File from wrapper
 wrapper.addEventListener("dragleave", () => {
-    dragText.innerHTML = "No file chosen, yet!";
+    dragText.textContent = "No file chosen, yet!";
 });
 
 //If user drop File on wrapper
@@ -40,7 +39,8 @@ wrapper.addEventListener("drop", (event) => {
     event.preventDefault();
     file = event.dataTransfer.files[0];
     fileValue = event.dataTransfer.files[0].name;
-    console.log(fileValue)
+    console.log(fileValue);
+    fileName.textContent = fileValue;
     //사용자 선택파일을 가져오면, [0]번째 파일만 선택함을 의미한다.
     showFile(); //calling function
 });
@@ -62,8 +62,4 @@ function showFile() {
         wrapper.classList.remove("active");
         dragText.textContent = "No file chosen, yet!";
     }
-    // if (this.value) {
-    //     let valueStore = this.value.match(regExp);
-    //     fileName.textContent = valueStore;
-    // }
 }
