@@ -55,6 +55,10 @@ function showFile() {
             img.src = result; //img 태그 생성 및 src 속성 내에서 사용자 선택 파일 소스 전달
             wrapper.classList.add("active");
             //wrapper에 imgTag 추가
+            cancelBtn.addEventListener("click", function () {
+                img.src = "";
+                wrapper.classList.remove("active");
+            })
         }
         reader.readAsDataURL(file);
     } else {
